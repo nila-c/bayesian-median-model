@@ -71,6 +71,8 @@ def partition(collection):
         yield [ [ first ] ] + smaller
 
 # priors ##############################################################
+
+# @param model vector of inclusion indicators
 def unif_prior(model):
     return 1
 
