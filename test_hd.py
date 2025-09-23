@@ -1,5 +1,6 @@
 import hamming_distance as hd
 import g_prior as gp
+import simple_median as sm
 import numpy as np
 
 # generating data #####################################################
@@ -32,5 +33,6 @@ testdata = np.append(testdata, temp, axis=1)
 
 # find median model ##########################################################
 print("valid covariance matrix: ", hd.isPosDef(cov))
-
-print(gp.findMedian(data=data, test_data=testdata, sd=sd))
+ 
+# g-prior median model
+print(sm.findMedianSimple(data=data, test_data=testdata, sd=sd))

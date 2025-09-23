@@ -86,7 +86,9 @@ def findMedian(data, test_data, prior, sd):
 
         # storing best model with respect to summation
         if bestVal == None:
+            print(summation)
             bestVal = summation
+            bestModel = model_hat
         else:
             if bestVal > summation:
                 print(summation)

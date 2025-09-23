@@ -1,0 +1,4 @@
+print out pi(j) values
+more signals
+implement new distance
+
