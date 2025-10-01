@@ -1,12 +1,13 @@
 import hamming_distance as hd
 import g_prior as gp
 import simple_median as sm
+import new_distance as nd
 import numpy as np
 
 # generating data #####################################################
 c = 0.9999
-p = 8
-cov = hd.genCov(p, [[0,1,2,3,4,5,6,7]], c)
+p = 12
+cov = hd.genCov(p, [[0,1,2,3],[4,5,6,7],[8,9,10,11]], c)
 mean = np.zeros(p)
 n = 100
 sd = 0.1 # sd of error term
@@ -35,4 +36,7 @@ testdata = np.append(testdata, temp, axis=1)
 print("valid covariance matrix: ", hd.isPosDef(cov))
  
 # g-prior median model
-print(sm.findMedianSimple(data=data, test_data=testdata, sd=sd))
+# print(sm.findMedianSimple(data=data, test_data=testdata, sd=sd))
+
+# testing new distance functions #############################################
+print(nd.findMedian(data, testdata, sd))

@@ -13,11 +13,10 @@ def n_prior(model, fit, sd, data):
     p = data.shape[1] - 1
     x = np.zeros(p)
     
-    data = data[:, :len(model)]
+    data = data[:, :p]
     A = np.matmul(data.T, data)
     A = np.linalg.inv(A)
     if sum(model) > 1 :
-
         for i in range(len(model)):
             if model[i]:
                 x[i] = fit[sum(model[:i+1])-1]
