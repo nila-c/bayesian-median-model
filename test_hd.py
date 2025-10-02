@@ -1,8 +1,9 @@
 import hamming_distance as hd
-import g_prior as gp
+from g_prior import n_prior
 import simple_median as sm
 import new_distance as nd
 import numpy as np
+import eig_algm as ea
 
 # generating data #####################################################
 c = 0.9999
@@ -33,10 +34,13 @@ temp = np.atleast_2d(temp).T
 testdata = np.append(testdata, temp, axis=1)
 
 # find median model ##########################################################
-print("valid covariance matrix: ", hd.isPosDef(cov))
+# print("valid covariance matrix: ", hd.isPosDef(cov))
  
 # g-prior median model
 # print(sm.findMedianSimple(data=data, test_data=testdata, sd=sd))
 
 # testing new distance functions #############################################
-print(nd.findMedian(data, testdata, sd))
+# print(nd.findMedian(data, testdata, sd))
+
+# testing eigen value algorithm ##############################################
+print(ea.sigmaMinMax(data, hd.unif_prior).shape)

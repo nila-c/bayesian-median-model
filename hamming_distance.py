@@ -44,7 +44,8 @@ def partition(collection):
 
 # @param model vector of inclusion indicators
 def unif_prior(model):
-    return 1
+    denom = 2**len(model)
+    return 1/denom
 
 def geom_prior(model):
     return 0.5**sum(model)
