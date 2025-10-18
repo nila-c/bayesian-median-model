@@ -7,8 +7,10 @@ import eig_algm as ea
 
 # generating data #####################################################
 c = 0.9999
-p = 12
-cov = hd.genCov(p, [[0,1,2,3],[4,5,6,7],[8,9,10,11]], c)
+model = [[0,1,2,3],[4,5,6,7],[8,9,10,11]]
+p = hd.findP(model)
+print(p)
+cov = hd.genCov(p, model, c)
 mean = np.zeros(p)
 n = 100
 sd = 0.1 # sd of error term

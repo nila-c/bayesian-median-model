@@ -20,7 +20,8 @@ def newDist(modelA, modelB, data):
         x = np.trace(projA @ projB)
     return sum(modelA) + sum(modelB) - 2 * x
 
-# updated find median function for only g-prior #########################
+# updated find median function #########################
+# uncomment chunks for g-prior version but i don't know if it works?
 def findMedian(data, test_data, sd):
     # initialising values
     n = data.shape[0]

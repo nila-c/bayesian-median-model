@@ -5,6 +5,14 @@ from sklearn import linear_model
 
 # create synthetic example of poor hamming distance result ############
 
+# gets p from model
+# @param model partition expressed as an array of arrays
+def findP(model):
+    i = []
+    for cluster in model:
+        i += [max(cluster)]
+    return(max(i)+1)
+
 # creates covariance matrix as seen above wrt a particular model
 # @param size int, n
 # @param model partition expressed as an array of arrays

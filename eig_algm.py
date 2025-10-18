@@ -48,6 +48,7 @@ def cond(subset, data, avg_mat):
    mat = projectionMat(data, subset) @ avg_mat
    return eigHalf(mat, subset)
 
+# outputs maximal models
 def sigmaMinMax(data, prior, *parameters):
     # initialising values
     p = data.shape[1]-1
@@ -63,13 +64,13 @@ def sigmaMinMax(data, prior, *parameters):
         if eigHalf(proj_mat @ avg_mat, model):
             remain_var += [i]
     
-    subsets = np.array(subsets(remain_var, p, data, avg_mat))
-    rank = np.sum(subsets, axis=1)
+    subsets_var = np.array(subsets(remain_var, p, data, avg_mat))
+    rank = np.sum(subsets_var, axis=1)
     max_rank = np.max(rank)
 
-    for i in range(len(subsets)):
+    for i in range(len(subsets_var)):
         if rank[i] == max_rank:
-            possible_models += [subsets[i,:]]
+            possible_models += [subsets_var[i,:]]
 
     possible_models = np.array(possible_models)
     possible_models = np.unique(possible_models, axis=0)
