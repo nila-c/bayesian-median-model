@@ -14,6 +14,7 @@ sys.path.append(str(lib_dir))
 # Now you can import library as if it were in the same folder
 import new_distance as nd
 import hamming_distance as hd
+import simple_median as sm
 import numpy as np
 
 def genData(mean, cov, n, sd):
@@ -51,22 +52,30 @@ def difCovData(model, cor_range, evals, n, sd):
     # initialising values
     p = hd.findP(model)
     mean = np.zeros(p)
-    df = np.zeros(shape=(evals,2))
+    df = np.zeros(shape=(evals,3))
     models = []
 
     # caluclate model for every correlation c and see if it has all signals
     for c in cor:
+        # generate data with specified correlation
         i = np.where(cor == c)
         df[i,0] = c
         cov = hd.genCov(p, model, c)
         data = genData(mean, cov, n, sd)
         testdata = genData(mean, cov, n, sd)
-        final = nd.findMedian(data, testdata, sd)
-        models += [final[1]]
-        val = goodModel(model, final[1])
+
+        # find new distance model
+        new_dist_final = nd.findMedian(data, testdata, sd)
+        models += [new_dist_final[1]]
+        val = goodModel(model, new_dist_final[1])
         df[i,1] = int(val)
 
-    return df
+        # find simple median model
+        median_final = sm.findMedianSimple(data, testdata, sd)
+        val = goodModel(model, median_final[1])
+        df[i,2] = int(val)
+
+    return [df, models]
 
 model = [[0,1,2,3],[4,5,6,7]]
 cor_range = [0.01,1]
